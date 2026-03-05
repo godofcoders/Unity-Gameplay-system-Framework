@@ -41,7 +41,7 @@ namespace Frameworks.Gameplay
             }
         }
 
-        private void HandleHeal(float percentage)
+        private void HandleHeal(float percentage, int count)
         {
             if (_health == null) return;
 
@@ -50,7 +50,7 @@ namespace Frameworks.Gameplay
             _health.ModifyHealth(healAmount);
         }
 
-        private void HandleInvincibility(float duration)
+        private void HandleInvincibility(float duration, int count)
         {
             if (_health == null) return;
 

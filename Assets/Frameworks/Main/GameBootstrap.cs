@@ -1,5 +1,6 @@
 using UnityEngine;
 using Frameworks.Gameplay;
+using Frameworks.UI;
 
 namespace Frameworks.Main
 {
@@ -8,7 +9,9 @@ namespace Frameworks.Main
     {
         [Header("System References")]
         [SerializeField] private UIManager uiManager;
-        [SerializeField] private HealthComponent healthComponent;
+        private HealthComponent healthComponent;
+        private AbilityComponent abilityComponent;
+        private InventoryComponent inventoryComponent;
         [SerializeField] private StatusEffects statusEffectManager;
 
         [Header("Player Spawning")]
@@ -17,28 +20,47 @@ namespace Frameworks.Main
 
         private void Awake()
         {
-            // 1. Clear static state (Preventing ghost subscriptions in Editor)
             ResetEventBus();
 
-            // 2. Manual Wiring (Dependency Injection)
-            // We initialize systems and inject dependencies manually
+            // 1. Initialize permanent systems
             if (uiManager != null) uiManager.Initialize();
+
+            // 2. Spawn and Wire the Player
+            SpawnAndWirePlayer();
+
+            Debug.Log("<color=green>Bootstrapper: Dynamic Wiring Complete.</color>");
+        }
+
+        private void SpawnAndWirePlayer()
+        {
+            if (playerPrefab == null || playerSpawnPoint == null)
+            {
+                Debug.LogError("Bootstrapper: Prefab or SpawnPoint missing!");
+                return;
+            }
+
+            // A. Instantiate the player
+            GameObject playerInstance = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+
+            // B. Capture the HealthComponent from the instance
+            healthComponent = playerInstance.GetComponent<HealthComponent>();
 
             if (healthComponent != null)
             {
+                // C. Initialize the health data
                 healthComponent.Construct(100f);
-            }
 
-            // Wiring StatusEffects to Health as per your diagram
-            if (statusEffectManager != null && healthComponent != null)
+                // D. INJECTION: Hand the health reference to the StatusEffectManager
+                // This fulfills the "Ability System -> Status Effects -> Health" flow
+                if (statusEffectManager != null)
+                {
+                    statusEffectManager.Construct(healthComponent);
+                }
+            }
+            else
             {
-                statusEffectManager.Construct(healthComponent);
+                Debug.LogError("Bootstrapper: Spawned player is missing a HealthComponent!");
             }
-
-            // 3. Game Start Logic
-            SpawnPlayer();
-
-            Debug.Log("<color=green>AAA Bootstrapper: All systems wired and player spawned.</color>");
         }
 
         private void ResetEventBus()
@@ -47,18 +69,6 @@ namespace Frameworks.Main
             EventBus.OnPlayerDied = null;
             EventBus.OnHealRequested = null;
             EventBus.OnInvincibilityRequested = null;
-        }
-
-        private void SpawnPlayer()
-        {
-            if (playerPrefab != null && playerSpawnPoint != null)
-            {
-                Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
-            }
-            else
-            {
-                Debug.LogWarning("Bootstrapper: Player Prefab or Spawn Point missing. Check Inspector.");
-            }
         }
     }
 }
