@@ -1,0 +1,16 @@
+{
+    "name": "Framework.services",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1b5e5eb629a8147c6874da1a04814ad7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

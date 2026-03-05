@@ -1,0 +1,16 @@
+{
+    "name": "Framework.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:df362bfce3f0b443e8330d527a2716f4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
