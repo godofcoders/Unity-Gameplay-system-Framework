@@ -1,7 +1,13 @@
 # Unity Gameplay Systems Framework
 
-A modular gameplay architecture demonstrating event-driven systems
-and decoupled gameplay modules built in Unity.
+A modular gameplay architecture built in Unity demonstrating  
+event-driven communication and decoupled gameplay systems.
+
+## Features
+- Event Bus communication
+- Service Locator for shared services
+- Modular gameplay systems
+- Sample gameplay scene
 
 ## Systems Included
 - Health System
@@ -10,12 +16,9 @@ and decoupled gameplay modules built in Unity.
 - Status Effect System
 
 ## Architecture
-Event-driven communication using an EventBus and Service Locator
-to keep gameplay systems modular and loosely coupled.
-
-## Demo
-Player ability damages enemy → event triggers status effects.
+The framework separates gameplay logic into modular systems that  
+communicate through an EventBus to avoid direct dependencies.
 
 ## Folder Structure
-Assets/Framework
+Assets/Framework  
 Assets/Samples
