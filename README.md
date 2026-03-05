@@ -47,7 +47,7 @@ statusEffectManager.Construct(health);
 
 ### Benefits
 
--Decoupled gameplay systems
+- Decoupled gameplay systems
 - Scalable architecture via asmdef
 - Zero reliance on expensive "Find" or "Search" methods
 - Easier debugging and memory safety via explicit initialization
