@@ -30,7 +30,7 @@ Assets/Frameworks/Main
 
 ## Usage
 
-### Casting an Ability
+### Manual Wiring via Bootstrapper
 
 ```csharp
 var health = player.GetComponent<HealthComponent>();
