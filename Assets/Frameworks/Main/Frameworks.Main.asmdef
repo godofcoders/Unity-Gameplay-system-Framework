@@ -1,7 +1,9 @@
 {
-    "name": "Framework.Demo",
+    "name": "Frameworks.Main",
     "rootNamespace": "",
     "references": [
+        "GUID:e3ccba4a448e24a6b848f970eb56c46d",
+        "GUID:4094e9e0fe7d5412aa8f92af0dec93bf",
         "GUID:df362bfce3f0b443e8330d527a2716f4"
     ],
     "includePlatforms": [],

@@ -1,22 +1,23 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryComponent : MonoBehaviour
 {
-    private List<string> items = new();
+    public int invincibilityPotions = 1;
+    public float potionDuration = 10f; // 10 seconds
 
-    public void AddItem(string item)
+    void Update()
     {
-        items.Add(item);
-
-        EventBus.Publish(new ItemAddedEvent
+        // Press 'E' to use the invincibility potion
+        if (Input.GetKeyDown(KeyCode.E) && invincibilityPotions > 0)
         {
-            Item = item
-        });
+            UsePotion();
+        }
     }
-}
 
-public struct ItemAddedEvent
-{
-    public string Item;
+    public void UsePotion()
+    {
+        invincibilityPotions--;
+        EventBus.OnInvincibilityRequested?.Invoke(potionDuration);
+        Debug.Log("Invincibility Potion used! Drain stopped for 10 seconds.");
+    }
 }

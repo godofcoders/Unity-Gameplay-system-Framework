@@ -1,42 +1,44 @@
-using UnityEngine;
-
-public class HealthComponent : MonoBehaviour
+namespace Frameworks.Gameplay
 {
-    public int MaxHealth = 100;
-    public int CurrentHealth;
+    using UnityEngine;
 
-    private void Awake()
+    public class HealthComponent : MonoBehaviour
     {
-        CurrentHealth = MaxHealth;
-    }
+        [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private float drainRate = 5f;
 
-    public void TakeDamage(int amount)
-    {
-        CurrentHealth -= amount;
+        private float _currentHealth;
+        private bool _isInvincible = false;
 
-        EventBus.Publish(new DamageEvent
+        public float MaxHealth => maxHealth;
+
+        public void Construct(float initialHealth)
         {
-            Target = gameObject,
-            Amount = amount
-        });
+            maxHealth = initialHealth;
+            _currentHealth = maxHealth;
+        }
 
-        if (CurrentHealth <= 0)
+        public void SetInvincible(bool state) => _isInvincible = state;
+
+        public void ModifyHealth(float amount)
         {
-            EventBus.Publish(new DeathEvent
+            _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, maxHealth);
+            EventBus.OnHealthChanged?.Invoke(_currentHealth, maxHealth);
+        }
+
+        private void Update()
+        {
+            if (_currentHealth <= 0 || _isInvincible) return;
+
+            _currentHealth -= drainRate * Time.deltaTime;
+
+            if (_currentHealth <= 0)
             {
-                Target = gameObject
-            });
+                _currentHealth = 0;
+                EventBus.OnPlayerDied?.Invoke();
+            }
+
+            EventBus.OnHealthChanged?.Invoke(_currentHealth, maxHealth);
         }
     }
-}
-
-public struct DamageEvent
-{
-    public GameObject Target;
-    public int Amount;
-}
-
-public struct DeathEvent
-{
-    public GameObject Target;
 }

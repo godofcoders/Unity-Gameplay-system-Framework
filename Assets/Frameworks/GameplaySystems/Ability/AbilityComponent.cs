@@ -2,16 +2,22 @@ using UnityEngine;
 
 public class AbilityComponent : MonoBehaviour
 {
-    public void CastAbility(GameObject target)
+    public int abilityUses = 3;
+    public float healPercentage = 0.20f; // 20%
+
+    void Update()
     {
-        var logger = ServiceLocator.Get<LoggingService>();
-        logger.Log("Ability Cast!");
-
-        var health = target.GetComponent<HealthComponent>();
-
-        if (health != null)
+        // Press 'Q' to use the heal ability
+        if (Input.GetKeyDown(KeyCode.Q) && abilityUses > 0)
         {
-            health.TakeDamage(10);
+            UseAbility();
         }
+    }
+
+    public void UseAbility()
+    {
+        abilityUses--;
+        EventBus.OnHealRequested?.Invoke(healPercentage);
+        Debug.Log($"Ability used! Remaining uses: {abilityUses}");
     }
 }

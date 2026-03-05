@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d445e1d153d0f41f388c9de96b65e59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invincibilityPotions: 1
+  potionDuration: 10
 --- !u!114 &779731523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d70a1cc4b0af4afaa8c8b31354cb99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityUses: 3
+  healPercentage: 0.2
 --- !u!114 &779731524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b734323c2e85044febb7c3c0efbfb7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  CurrentHealth: 0
+  maxHealth: 100
+  drainRate: 5
 --- !u!1 &1324805866
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b734323c2e85044febb7c3c0efbfb7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  CurrentHealth: 0
+  maxHealth: 100
+  drainRate: 5
 --- !u!1 &1640536653
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7018b4f726eba472bab1cd29e88b51e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
+  healthComponent: {fileID: 0}
+  statusEffectManager: {fileID: 0}
+  playerPrefab: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
 --- !u!1 &2000388196
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +437,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2000388198}
   - component: {fileID: 2000388197}
-  - component: {fileID: 2000388199}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -463,20 +471,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2000388199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2000388196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262b32dfc1ff844e88e7f41e7e43dfbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAbility: {fileID: 779731523}
-  enemy: {fileID: 1324805866}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

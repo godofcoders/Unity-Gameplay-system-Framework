@@ -1,5 +1,5 @@
 {
-    "name": "Gameplay.Core",
+    "name": "Frameworks.UI",
     "rootNamespace": "",
     "references": [
         "GUID:e3ccba4a448e24a6b848f970eb56c46d"
