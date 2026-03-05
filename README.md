@@ -22,3 +22,6 @@ communicate through an EventBus to avoid direct dependencies.
 ## Folder Structure
 Assets/Framework  
 Assets/Samples
+
+
+![Architecture](docs/Arch.png)
