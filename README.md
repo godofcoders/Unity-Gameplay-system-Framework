@@ -25,3 +25,28 @@ Assets/Samples
 
 
 ![Architecture](docs/Arch.png)
+
+
+## Usage
+
+### Casting an Ability
+
+```csharp
+var ability = player.GetComponent<AbilityComponent>();
+ability.CastAbility(enemy);
+```
+
+### Internal Flow
+
+1. AbilityComponent raises an ability request.
+2. The request is broadcast through the EventBus.
+3. The Ability System validates cooldowns and conditions.
+4. Gameplay systems react to the event.
+5. UI updates without direct dependency on gameplay logic.
+
+### Benefits
+
+- Decoupled gameplay systems  
+- Scalable architecture  
+- Minimal cross-system dependencies  
+- Easier debugging and testing
